@@ -46,27 +46,28 @@ namespace ImposterGameApp
         private void CreateWorld()
         {
             //Imposter Game Rooms
-            Room breakRoom = new Room("in the Break Room"); rooms.Add("BreakRoom", breakRoom);
-            Room pilotRoom = new Room("in the Pilot Room"); rooms.Add("pilotRoom", pilotRoom);
-            Room gearRoom = new Room("in the Gear Room"); rooms.Add("gearRoom", gearRoom);
-            Room crewQuarters = new Room("in Crew Quarters"); rooms.Add("crewQuarters", crewQuarters);
+            Room breakRoom = new Room("in the Break Room ","There's no time to be breaking..."); rooms.Add("BreakRoom", breakRoom);
+            Room pilotRoom = new Room("in the Pilot Room ","The pilot controls the spaceship.However, the flight seems to be headed on the wrong path"); rooms.Add("pilotRoom", pilotRoom);
+            Room gearRoom = new Room("in the Gear Room ","This room usually contains a plethora of personal gear for space missions."); rooms.Add("gearRoom", gearRoom);
+            Room crewQuarters = new Room("in Crew Quarters ", "All crew members, except for you, are active at work elsewhere"); rooms.Add("crewQuarters", crewQuarters);
             //Room voidOfSpace = new Room("in the Void of Space"); rooms.Add("voidOfSpace", voidOfSpace);
-            Room meetingRoom = new Room("in the Meeting Room"); rooms.Add("meetingRoom", meetingRoom);
-            Room cargoRoom = new Room("in the Break Room"); rooms.Add("cargoRoom", cargoRoom);
+            Room meetingRoom = new Room("in the Meeting Room ","This is your ship's board room.  All crew members, except for you, appear to be working"); rooms.Add("meetingRoom", meetingRoom);
+            Room cargoRoom = new Room("in the Cargo Room ","This small room is croweded empty cargo boxes."); rooms.Add("cargoRoom", cargoRoom);
 
             //Rooms populated with objects/weapons
             breakRoom.AddRoomObject("spoon", "A silver dining utensil", 0.5, true); breakRoom.AddRoomWeapon("knife", "A pointy silver dining utensil. Makes a useful weapon", 0.5);
             breakRoom.AddRoomObject("fork", "A silver dining utensil", 0.5, true);
-            pilotRoom.AddRoomObject("Camera","A security camera that views of a all rooms of the entire spaceship", 3, false);
-            gearRoom.AddRoomWeapon("laser gun","", 5); gearRoom.AddRoomObject("shelves", "", 5, false);
-            cargoRoom.AddRoomObject("cargo box", "", 1.5, false); cargoRoom.AddRoomObject("gloves", "", 1.5, false);
-            crewQuarters.AddRoomObject("desk", "A surface for writing", 30, false); crewQuarters.AddRoomObject("chair", "", 1.5, true);
+            pilotRoom.AddRoomObject("camera panel","A security camera view of a all rooms of the entire spaceship. However, it is broken", 3, false);
+            gearRoom.AddRoomWeapon("laser gun","A futuristic weapon", 3); gearRoom.AddRoomWeapon("utility knife", "A sharp metal weapon", 5); gearRoom.AddRoomObject("shelves", "Wall shelving", 5, false);
+            cargoRoom.AddRoomObject("cargo box", "An empty steel box", 20, false); cargoRoom.AddRoomObject("gloves", "An old pair of black gloves", 1.5, false);
+            crewQuarters.AddRoomObject("desk", "A surface for writing", 30, false); crewQuarters.AddRoomObject("chair", "An unmovable chair", 1.5, true);
            // meetingRoom.AddRoomObject(, "",1.5, true); meetingRoom.AddRoomObject("Food", "",1.5, true);
 
             //Doors connected for navigating throughout game
             Door door = Door.connectRooms(breakRoom, cargoRoom, "west", "east");
             door = Door.connectRooms(breakRoom, pilotRoom, "west", "east");
             door = Door.connectRooms(pilotRoom, breakRoom, "south", "north");
+            door = Door.connectRooms(crewQuarters, gearRoom, "east", "west");
             door = Door.connectRooms(gearRoom, crewQuarters, "west", "east");
             door = Door.connectRooms(crewQuarters, meetingRoom, "north", "south");
             door = Door.connectRooms(meetingRoom, breakRoom, "south", "north");
@@ -76,9 +77,9 @@ namespace ImposterGameApp
             NPC yellowNPC = new NPC("yellow", false, meetingRoom); yellowNPC.SetHint("I don't know who the imposter is, but you need a weapon to defeat them"); NPCS.Add(yellowNPC);
             NPC greenNPC = new NPC("green", false, cargoRoom); greenNPC.SetHint("Blue seems suspicious..."); NPCS.Add(greenNPC);
 
-            //NPC OtherBlueNPC = blueNPC.Clone(breakRoom, "TheOtherBlue");
+            NPC OtherBlueNPC = blueNPC.Clone(breakRoom, "TheOtherBlue");
             //blue NPC's clone
-            NPCS.Add(blueNPC.Clone(breakRoom, "TheOtherBlue"));
+            NPCS.Add(OtherBlueNPC);
 
             //All NPC move to random rooms
            // MoveNPC();

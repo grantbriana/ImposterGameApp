@@ -87,7 +87,7 @@ namespace ImposterGameApp
         {
             String intro = "\n\nYou are a crewmember on a spaceship returning to Earth.\n\n As the mission goes on, strange events begin to occur..." +
                 "\n\n Find Hints & clues among your spaceship in order to find the imposter. (kill the imposter)"
-                + "\n\nType 'help' if you need help.\n" + player.CurrentRoom.Description(); 
+                + "\n\nType 'help' if you need help.\n" + player.CurrentRoom.Description() ; 
            
             return intro;
         }

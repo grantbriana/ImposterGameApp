@@ -15,6 +15,7 @@ namespace ImposterGameApp
 
 
         private string _tag;
+        private string _LongDescription;
         public string Tag
         {
             get
@@ -27,18 +28,19 @@ namespace ImposterGameApp
             }
         }
 
-        public Room() : this("No Tag")
+        public Room() : this("No Tag","No Description")
         {
 
         }
 
+
         //Designated Constructor
-        public Room(string tag)
+        public Room(string tag, string longDescription)
         {
             exits = new Dictionary<string, Door>();
             roomObjects = new Dictionary<string, GameObject>();
             roomNPCs = new List<NPC>();
-
+            _LongDescription = longDescription;
             this.Tag = tag;
         }
 
@@ -119,20 +121,22 @@ namespace ImposterGameApp
         }
 
         //check if NPC in room
-        public void NPCInRoom()
+        public string NPCInRoom()
         {
+            string presentNPC = "";
             //NPC nPC = null;
             if (roomNPCs.Count > 0)
             {
                 foreach (NPC npc in roomNPCs)
                 {
-                    Console.WriteLine(npc.Name + " is present " + _tag);
+                     presentNPC = npc.Name + " is present " + _tag;
                 }
             }
             else
             {
-                Console.WriteLine("No one is here") ;
+                presentNPC = "No one is here" ;
             }
+            return presentNPC;
         }
 
         public bool IsNPCInRoom(string nPC)
@@ -173,10 +177,16 @@ namespace ImposterGameApp
             roomNPCs.Add(npc);
         }
 
+        public string LongDescription()
+        {
+            return _LongDescription;
+        }
     
         public string Description()
         {
-            return "You are " + this.Tag + ".\n *** " + this.GetExits() + "\nThis room contains " + this.GetRoomObjects() ; 
+            return "You are " + this.Tag + this.LongDescription() + ".\n *** " + this.GetExits() + "\n"
+                   + "\nThis room contains " + this.GetRoomObjects() + "\n" + this.NPCInRoom();
+            
         }
 
     }

@@ -131,8 +131,9 @@ namespace ImposterGameApp
         //Allows players to store valid objects in their inventory (backpack)
         public bool TakeRoomObject(string obj)
         {
+            GameObject gameObj = CurrentRoom.GetRoomObject(obj);
             //Check if object is in room
-            if (!CurrentRoom.ObjectInRoom(obj))
+            if (gameObj == null) //!CurrentRoom.ObjectInRoom(obj))
             {
                 this.ErrorMessage("There's no sign of that in here!");
                 return false;
@@ -141,7 +142,7 @@ namespace ImposterGameApp
             else
             {
                 //Find obj. in room list of objects
-                GameObject gameObj = CurrentRoom.GetRoomObject(obj);
+                //GameObject gameObj = CurrentRoom.GetRoomObject(obj);
                 //Player can only carry a certain amount of weight
                 if (backpack.BackPackWeight() + gameObj.Weight < backpack.maxCapacity && gameObj.Takeable)
                 {

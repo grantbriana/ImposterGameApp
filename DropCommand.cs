@@ -16,13 +16,23 @@ namespace ImposterGameApp
         override
         public bool Execute(Player player)
         {
-            if (this.HasSecondWord())
+            State lost = player.GetState("Lost");
+            State won = player.GetState("Won");
+
+            if (player.GetCurrentState != lost && player.GetCurrentState != won)
             {
-                player.DropRoomObject(this.SecondWord,player.CurrentRoom.roomObjects);
-            }
-            else
-            {
-                player.OutputMessage("\nDrop What?");
+                if (this.HasSecondWord() && !this.HasThirdWord())
+                {
+                    player.DropRoomObject(this.SecondWord, player.CurrentRoom.roomObjects);
+                }
+                else if (this.HasThirdWord())
+                {
+                    player.DropRoomObject(this.SecondWord + " " + this.ThirdWord, player.CurrentRoom.roomObjects);
+                }
+                else
+                {
+                    player.OutputMessage("\nDrop What?");
+                }
             }
             return false;
         }
