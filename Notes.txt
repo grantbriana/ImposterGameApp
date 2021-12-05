@@ -1,0 +1,57 @@
+﻿
+
+namespace ImposterGameApp
+{
+    class Notes
+    {
+
+    - State machines are a concept in which a container stores the status of something at any given time. 
+      Then, given an input, it can provide an output based on the current state, transitioning to a new state in the process
+
+      Good Idea to create a State Diagram to demonstrate the states in the program (& ther transitions)
+
+      - Entry
+      - Exit
+      - Update Loop
+      - currentState
+
+      State is an ABSTRACT class which all other stateMachines in the program are derived from 
+-------------------------------------------------------------------------------------------------------------------------------------
+      Example: 
+
+        public void Initialize(State startingState)
+        {
+            CurrentState = startingState;
+            startingState.Enter();
+        }
+
+        public void ChangeState(State newState)
+        {
+            CurrentState.Exit();
+
+            CurrentState = newState;
+            newState.Enter();
+        }
+
+        //Within Player Class
+        enum State
+        {
+          STATE_STANDING,
+          STATE_JUMPING,
+          STATE_DUCKING,
+        };
+
+        public StateMachine movementSM;
+        public StandingState standing;
+        public DuckingState ducking;
+        public JumpingState jumping;
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+   enum State { Dead, Meeting, Speaking }
+        private State Dead { get; set; }
+        private State Meeting { get; set; }
+        private State Speaking { get; set; }
+
+    }
+}
