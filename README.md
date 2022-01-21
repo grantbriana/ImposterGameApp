@@ -53,8 +53,7 @@ different states and conditions.
 - Found: Notification.cs (Notification class), NotificationCenter.cs
 (NotificationCenter class)
 - Implemented in classes: Player (WalkToPreviousRoom method: Line 63,
-KillImposter method: Line 243, TalkTo method: Line 214, WalkTo method: Line
-93)
+KillImposter method: Line 243, TalkTo method: Line 214, WalkTo method: Line 93)
 - The finite state machine is used to control the behavior of the program and player
 under different states and conditions.
 
